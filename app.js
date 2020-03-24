@@ -9,7 +9,13 @@ async function run() {
   if (command === "reset") {
     return reset(answeredMasterPassword);
   }
+
   const masterPassword = readMasterPassword();
+
+  if (masterPassword === null) {
+    console.error("Bitte führen Sie reset aus, um eine Datenbank anzulegen.");
+    return;
+  }
 
   if (!verifyHash(answeredMasterPassword, masterPassword)) {
     console.error("Falsches Passwort");
